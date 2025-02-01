@@ -7,11 +7,11 @@
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIMPLE_PAGE_START, scopes: $this->getRenderHookScopes()) }}
 
     <section class="grid auto-cols-fr gap-y-6">
-        <x-filament-panels::header.simple
-            :heading="$heading ??= $this->getHeading()"
+        {{-- <x-filament-panels::header.simple --}}
+            {{-- :heading="$heading ??= $this->getHeading()" --}}
             {{-- :logo="$this->hasLogo()" --}}
             {{-- :subheading="$subheading ??= $this->getSubHeading()" --}}
-        />
+        {{-- /> --}}
 
         {{ $slot }}
     </section>

@@ -1,5 +1,5 @@
 @php
-    $brandName = filament()->getBrandName();
+    $brandName = "Skin Logic";
     $brandLogo = filament()->getBrandLogo();
     $brandLogoHeight = filament()->getBrandLogoHeight() ?? '1.5rem';
     $darkModeBrandLogo = filament()->getDarkModeBrandLogo();

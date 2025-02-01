@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Blade;
 use Filament\Forms\Components\Checkbox;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Component;
+use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 
 class LoginUser extends Login
@@ -30,9 +31,18 @@ class LoginUser extends Login
             ),
         ];
     }
+    public function registerAction(): Action
+    {
+        return Action::make('register')
+            ->link()
+            ->label(__('filament-panels::pages/auth/login.actions.register.label'))
+            ->url(filament()->getRegistrationUrl());
+    }
+
+
 protected function getEmailFormComponent(): Component
     {
-        return TextInput::make('halo')
+        return TextInput::make('email')
             ->label(__('filament-panels::pages/auth/login.form.email.label'))
             ->email()
             ->required()
