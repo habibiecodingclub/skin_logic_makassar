@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Filament\Pages\Auth;
-
+use Illuminate\Validation\ValidationException;
 use Filament\Pages\Page;
 use Filament\Pages\Auth\Login;
 use Illuminate\Support\Facades\Blade;
@@ -9,6 +9,7 @@ use Filament\Forms\Components\Checkbox;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Component;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Forms\Components\TextInput;
 
 class LoginUser extends Login
@@ -31,6 +32,23 @@ class LoginUser extends Login
             ),
         ];
     }
+
+    protected function throwFailureValidationException(): never
+    {
+       Notification::make()
+        ->title(__('Error!'))
+        ->body(__('The credentials did not match our records'))
+        ->danger()
+        ->send();
+
+    // Lempar ValidationException untuk membuat field menyala merah
+    throw ValidationException::withMessages([
+        'data.email' => __(''),
+        'data.password' => __(''),
+    ]);
+    }
+
+
     public function registerAction(): Action
     {
         return Action::make('register')

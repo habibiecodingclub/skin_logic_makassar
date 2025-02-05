@@ -6,6 +6,7 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,11 +26,11 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make("Customer Name"),
-                TextInput::make("Phone Number"),
-                TextInput::make("Email"),
-                TextInput::make("Date of Birth"),
-                TextInput::make("Occupation")
+                TextInput::make("Customer Name")->required(),
+                TextInput::make("Phone Number")->required(),
+                TextInput::make("Email")->required()->email(),
+                DatePicker::make("Date of Birth")->required()->label("Date of Birth")->displayFormat("d-m-Y")->format('Y-m-d'),
+                TextInput::make("Occupation")->required()
             ]);
     }
 
@@ -38,6 +39,7 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make('customer_id'),
                 TextColumn::make('Customer Name'),
                 TextColumn::make('Phone Number'),
                 TextColumn::make('Email'),
