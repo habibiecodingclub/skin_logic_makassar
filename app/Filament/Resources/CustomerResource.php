@@ -16,6 +16,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use function Livewire\before;
+
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
@@ -26,11 +28,35 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make("Customer Name")->required(),
-                TextInput::make("Phone Number")->required(),
+                TextInput::make("Customer Name")
+                ->required()
+                ->minLength(3)
+                ->maxLength(100)
+                ->rules(['regex:/^[a-zA-Z\s]+$/']) # hanya menerima angka dan huruf
+                ->validationMessages([
+                    "minLength" => "Customer name must be at least 3 characters.",
+                    "regex"=>"Customer name should contain alphabets characters and space."
+                ]),
+                TextInput::make("Phone Number")
+                ->required()
+                ->minLength(10)
+                ->maxLength(15)
+                ->rules('regex:/^[0-9]+$/')
+                ->validationMessages([
+                    "regex" => "Customer phone number should only contain numbers"
+                ]),
                 TextInput::make("Email")->required()->email(),
-                DatePicker::make("Date of Birth")->required()->label("Date of Birth")->displayFormat("d-m-Y")->format('Y-m-d'),
-                TextInput::make("Occupation")->required()
+                DatePicker::make("Date of Birth")
+                ->required()
+                ->label("Date of Birth")
+                ->displayFormat("d-m-Y")
+                ->format('Y-m-d')
+                ->rules(['before:today'])
+                ->validationMessages(["before" => "tanggal tidak valid"]),
+                TextInput::make("Occupation")
+                ->required()
+                ->minLength(10)
+                ->maxLength(100)
             ]);
     }
 
@@ -44,7 +70,8 @@ class CustomerResource extends Resource
                 TextColumn::make('Phone Number'),
                 TextColumn::make('Email'),
                 TextColumn::make('Date of Birth'),
-                TextColumn::make('Occupation')
+                TextColumn::make('Occupation'),
+                TextColumn::make('created_at')->formatStateUsing(fn($state)=>$state->format('d-m-Y'))->label("bergabung sejak")
             ])
             ->filters([
                 //
