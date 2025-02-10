@@ -55,7 +55,7 @@ class CustomerResource extends Resource
                 ->validationMessages(["before" => "tanggal tidak valid"]),
                 TextInput::make("Occupation")
                 ->required()
-                ->minLength(10)
+                ->minLength(5)
                 ->maxLength(100)
             ]);
     }
@@ -78,7 +78,7 @@ class CustomerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
