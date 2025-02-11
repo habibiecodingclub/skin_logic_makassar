@@ -31,8 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => '#203158',
             ])
+            ->viteTheme('resources/css/app.css')//konfigurasi untuk kostum CSS  
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -54,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->favicon(asset('images/logo.png'))
             ->authMiddleware([
                 Authenticate::class,
             ]);
