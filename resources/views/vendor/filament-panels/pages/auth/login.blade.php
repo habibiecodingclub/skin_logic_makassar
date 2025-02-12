@@ -15,6 +15,9 @@
 
     <x-filament-panels::form id="form" wire:submit="authenticate">
         {{ $this->form }}
+        <div class="tes">
+            <p>halo</p>
+        </div>
 
         <x-filament-panels::form.actions
             :actions="$this->getCachedFormActions()"
