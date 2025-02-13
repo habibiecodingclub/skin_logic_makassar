@@ -1,29 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Override dengan specificity yang lebih tinggi */
-html body .fi-topbar {
-    background-color: #203158 !important;
-}
-
-.fi-topbar nav {
-    background-color: #203158 !important;
-}
-.fi-sidebar-header {
-    background-color: #203158 !important;
-}
-/* Jika perlu, tambahkan style untuk elemen dalam topbar */
-.fi-sidebar {
-    background-color: #d4d9e4 !important;
-}
-/* Tombol sign Up */
-.fi-ac {
-    background-color: #203158;
-}
-
-/* Teks Logo  */
-.text-lg {
-    color: #d7cc8a;
-    font-size: 1rem;
-}

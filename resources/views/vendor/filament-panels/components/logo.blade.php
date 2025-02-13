@@ -111,7 +111,7 @@
         @endif
 
         <!-- Tambahan teks di samping logo -->
-        <span class="text-lg font-semibold text-gray-900 dark:text-white">
+        <span class="text-base font-semibold !important" style="color: #D7CC8A">
             Skinlogic Makassar
         </span>
     </div>
