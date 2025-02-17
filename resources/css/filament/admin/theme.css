@@ -1,16 +1,6 @@
-@import '/vendor/filament/filament/resources/css/theme.css';
+@import "/vendor/filament/filament/resources/css/theme.css";
 
 @config 'tailwind.config.js';
-
-/* .tes{
-    font-size: 20rem;
-} */
-
-/* Override dengan specificity yang lebih tinggi */
-html body .fi-topbar {
-    background-color: #203158 !important;
-}
-
 
 .fi-topbar nav {
     background-color: #203158 !important;
@@ -23,12 +13,9 @@ html body .fi-topbar {
     background-color: #d4d9e4 !important;
 }
 /* Tombol sign Up */
-.fi-ac {
-    background-color: #203158;
-}
-
-/* Teks Logo  */
-.text-lg {
-    color: #d7cc8a;
-    font-size: 1rem;
+/* .fi-ac {
+    background-color: white !important;
+} */
+.fi-logo {
+    padding-top: 0.2rem !important;
 }

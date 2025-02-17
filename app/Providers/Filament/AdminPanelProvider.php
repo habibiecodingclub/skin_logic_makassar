@@ -34,7 +34,8 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Blue,
                 'biru' => "#203158"
             ])
-            // ->viteTheme('resources/css/app.css')//konfigurasi untuk kostum CSS
+            ->viteTheme('resources/css/filament/admin/theme.css')//konfigurasi untuk kostum CSS
+            ->darkMode(false)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
