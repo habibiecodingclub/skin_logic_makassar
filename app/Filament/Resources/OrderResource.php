@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,22 +20,27 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-               Select::make('Choose Name')
-               ->placeholder('Choose name')
-               ->options([
-                'Muadz' => "Muadz",
-                'Khumaedi' => "Khumaedi"
-               ]),
-               TextInput::make("Product Name"),
-               TextInput::make("Product Price"),
-               TextInput::make("Treatment Name"),
-               TextInput::make("Treatment Price"),
+                Select::make('customer_id')
+                    ->relationship('customer', 'Customer_Name')
+                    ->required()
+                    ->label('Customer'),
+                TextInput::make('product_name')
+                    ->required()
+                    ->maxLength(100),
+                TextInput::make('quantity')
+                    ->required()
+                    ->numeric(),
+                TextInput::make('total_price')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\DatePicker::make('order_date')
+                    ->required(),
             ]);
     }
 
@@ -42,7 +48,12 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('order_id'),
+                TextColumn::make('customer.Customer_Name')->label('Customer Name'),
+                TextColumn::make('product_name'),
+                TextColumn::make('quantity'),
+                TextColumn::make('total_price'),
+                TextColumn::make('order_date')->date(),
             ])
             ->filters([
                 //

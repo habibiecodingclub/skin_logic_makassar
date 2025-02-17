@@ -1,5 +1,4 @@
 <?php
-// Muadz Ibda
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
@@ -28,7 +27,7 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make("Customer Name")
+                TextInput::make("Customer_Name")
                 ->required()
                 ->minLength(3)
                 ->maxLength(100)
@@ -66,7 +65,7 @@ class CustomerResource extends Resource
             ->columns([
                 //
                 TextColumn::make('customer_id'),
-                TextColumn::make('Customer Name'),
+                TextColumn::make('Customer_Name'),
                 TextColumn::make('Phone Number'),
                 TextColumn::make('Email'),
                 TextColumn::make('Date of Birth'),
