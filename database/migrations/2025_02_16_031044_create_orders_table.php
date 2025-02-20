@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_id')->unique();
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->string('product_name');
+            $table->string('order_list');
             $table->integer('quantity');
             $table->decimal('total_price', 10, 2);
             $table->date('order_date');

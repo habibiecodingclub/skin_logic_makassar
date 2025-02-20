@@ -6,8 +6,15 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,21 +33,45 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('customer_id')
-                    ->relationship('customer', 'Customer_Name')
-                    ->required()
-                    ->label('Customer'),
-                TextInput::make('product_name')
-                    ->required()
-                    ->maxLength(100),
-                TextInput::make('quantity')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('total_price')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DatePicker::make('order_date')
-                    ->required(),
+                Split::make([
+                    Section::make([
+                        Select::make('customer_id')
+                            ->relationship('customer', 'Customer_Name')
+                            ->required()
+                            ->label('Customer'),
+                        Repeater::make('quantities')
+                            ->label('Quantities and Products')
+                            ->schema([
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make("Product_name")
+                                            ->label('product name')
+                                            ->required(),
+                                        TextInput::make("quantity")
+                                            ->label('quantity')
+                                            ->required()
+                                    ])
+                            ])
+                            ->defaultItems(1)
+                            ->addActionLabel('Add Quantity')
+                            ->addable(true)
+                            ->collapsible()
+                    ]),
+                ])
+
+
+
+                // Textarea::make('order_list')
+                //     ->required()
+                //     ->maxLength(100),
+                // TextInput::make('quantity')
+                //     ->required()
+                //     ->numeric(),
+                // TextInput::make('total_price')
+                //     ->required()
+                //     ->numeric(),
+                // Forms\Components\DatePicker::make('order_date')
+                //     ->required(),
             ]);
     }
 
@@ -50,7 +81,7 @@ class OrderResource extends Resource
             ->columns([
                 TextColumn::make('order_id'),
                 TextColumn::make('customer.Customer_Name')->label('Customer Name'),
-                TextColumn::make('product_name'),
+                TextColumn::make('order_list'),
                 TextColumn::make('quantity'),
                 TextColumn::make('total_price'),
                 TextColumn::make('order_date')->date(),
