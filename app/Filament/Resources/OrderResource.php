@@ -39,24 +39,50 @@ class OrderResource extends Resource
                             ->relationship('customer', 'Customer_Name')
                             ->required()
                             ->label('Customer'),
-                        Repeater::make('quantities')
-                            ->label('Quantities and Products')
+                        Repeater::make('Product Name and Price')
+                            ->label('Product Name and Price')
                             ->schema([
                                 Grid::make(2)
                                     ->schema([
                                         TextInput::make("Product_name")
-                                            ->label('product name')
+                                            ->label('Product Name')
                                             ->required(),
-                                        TextInput::make("quantity")
-                                            ->label('quantity')
+                                        TextInput::make("qty")
+                                            ->label('qty')
                                             ->required()
                                     ])
                             ])
                             ->defaultItems(1)
-                            ->addActionLabel('Add Quantity')
+                            ->maxItems(6)
+                            ->addActionLabel('Add Product')
                             ->addable(true)
-                            ->collapsible()
+                            ->collapsible(),
+                        Repeater::make('Treatment Name and Price')
+                            ->label('Treatment Name and Price')
+                            ->schema([
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make("Treatment_Name")
+                                            ->label('Treatment Name')
+                                            ->required(),
+                                        TextInput::make("qty")
+                                            ->label('qty')
+                                            ->required()
+                                    ])
+                            ])
+                            ->defaultItems(1)
+                            ->maxItems(6)
+                            ->addActionLabel('Add Treatment')
+                            ->addable(true)
+                            ->collapsible(),
                     ]),
+                    Section::make('Order Details')
+                        ->schema([
+                            TextInput::make('Order_id')
+                                ->label('Order ID')
+                                ->disabled()
+                        ])
+                        ->hidden(fn($record) => $record === null)
                 ])
 
 
