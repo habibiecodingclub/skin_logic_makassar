@@ -3,16 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
@@ -24,8 +21,24 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                //
-                TextInput::make("Product Name")
+                Forms\Components\TextInput::make('Product_Name')
+                    ->required()
+                    ->label('Product Name'),
+                Forms\Components\Select::make('Product_Category')
+                    ->options(Product::getProductCategoryOptions()) // Ambil opsi enum dari model
+                    ->required()
+                    ->label('Product Category'),
+                Forms\Components\TextInput::make('Product_Price')
+                    ->numeric()
+                    ->required()
+                    ->label('Product Price'),
+                Forms\Components\TextInput::make('SKU-Number')
+                    ->required()
+                    ->label('SKU Number'),
+                Forms\Components\Textarea::make('Description')
+                    ->required()
+                    ->label('Description'),
+
             ]);
     }
 
@@ -33,7 +46,11 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('Product_Name')->label('Product Name'),
+                Tables\Columns\TextColumn::make('Product_Category')->label('Product Category'),
+                Tables\Columns\TextColumn::make('Product_Price')->label('Product Price'),
+                Tables\Columns\TextColumn::make('SKU-Number')->label('SKU Number'),
+                TextColumn::make('Description')->label('Description'),
             ])
             ->filters([
                 //

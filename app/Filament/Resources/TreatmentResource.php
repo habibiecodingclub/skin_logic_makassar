@@ -6,10 +6,13 @@ use App\Filament\Resources\TreatmentResource\Pages;
 use App\Filament\Resources\TreatmentResource\RelationManagers;
 use App\Models\Treatment;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,8 +27,27 @@ class TreatmentResource extends Resource
     {
         return $form
             ->schema([
-                //
-                TextInput::make("Treatment Name")
+                TextInput::make("Treatment_Name")
+                ->required()
+                ->label("Treatment Name"),
+                Select::make("Treatment_Category")
+                ->options(Treatment::getTreatmentCategoryOptions())
+                ->required()
+                ->label("Treatment Category"),
+                TextInput::make("Treatment_Price")
+                ->numeric()
+                ->required()
+                ->label("Treatment Price"),
+                TextInput::make("SKU-Number")
+                ->required()
+                ->label("SKU Number"),
+                Textarea::make("Description")
+                ->required()
+                ->label("Description")
+
+
+
+
             ]);
     }
 
@@ -33,7 +55,14 @@ class TreatmentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make("Treatment_Name")->label("Treatment Name"),
+                TextColumn::make("Treatment_Category")->label("Treatment Category"),
+                TextColumn::make("Treatment_Price")->label("Treatment Price")->formatStateUsing(function ($state){
+                    return "Rp. " . number_format($state, 2, ',', '.');
+                }),
+                TextColumn::make("SKU-Number")->label("SKU Number"),
+                TextColumn::make("Description")->label("Description")
+
             ])
             ->filters([
                 //

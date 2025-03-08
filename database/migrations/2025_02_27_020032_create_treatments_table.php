@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->string("Treatment_Name");
+            $table->enum("Treatment_Category", ["Facial", "Chemical Peeling"]);
+            $table->string("Treatment_Price");
+            $table->string("SKU-Number")->unique();
+            $table->text("Description");
             $table->timestamps();
         });
     }
