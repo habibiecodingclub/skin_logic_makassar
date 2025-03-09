@@ -38,6 +38,7 @@ class CustomerResource extends Resource
                 ]),
                 TextInput::make("Phone Number")
                 ->required()
+                ->numeric()
                 ->minLength(10)
                 ->maxLength(15)
                 ->rules('regex:/^[0-9]+$/')

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("customer_id")->unique();
             $table->string("Customer_Name");
-            $table->integer("Phone Number");
+            $table->string("Phone Number");
             $table->string("Email");
             $table->string("Occupation");
             $table->date("Date of Birth");
