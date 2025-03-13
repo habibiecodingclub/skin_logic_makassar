@@ -61,6 +61,37 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## 13 Maret 2025
+
+## Menyesuaikan tampilan untuk add Costumer
+
+1. Menambahkan Grid Layout Komponen
+
+```php
+<?php->
+            Grid::make([
+                'default' => 3, // 1 kolom di layar kecil
+                'md' => 3,      // 2 kolom di layar medium (tablet)
+                'lg' => 3,      // 3 kolom di layar besar (desktop)
+                ]);
+?>
+```
+
+2. Menambahkan colom span
+
+```php
+->columnSpan(2)
+```
+
+3. Menambahkan place holder untuk menyseuaikan tampilannya
+
+```php
+<?php->
+        Placeholder::make('') // Kosongkan 1 kolom
+?>
+
+```
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

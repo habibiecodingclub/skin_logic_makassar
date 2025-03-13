@@ -14,6 +14,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 
 use function Livewire\before;
 
@@ -26,9 +28,15 @@ class CustomerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
+        ->schema([
+            Grid::make([
+                'default' => 3, // 1 kolom di layar kecil
+                'md' => 3,      // 2 kolom di layar medium (tablet)
+                'lg' => 3,      // 3 kolom di layar besar (desktop)
+            ]) ->schema([
                 TextInput::make("Customer_Name")
                 ->required()
+                ->columnSpan(2) // Mengambil 2 kolom dari 3
                 ->minLength(3)
                 ->maxLength(100)
                 ->rules(['regex:/^[a-zA-Z\s]+$/']) # hanya menerima angka dan huruf
@@ -38,13 +46,23 @@ class CustomerResource extends Resource
                 ]),
                 TextInput::make("Phone Number")
                 ->required()
+                ->columnSpan(2)
                 ->minLength(10)
                 ->maxLength(15)
                 ->rules('regex:/^[0-9]+$/')
                 ->validationMessages([
                     "regex" => "Customer phone number should only contain numbers"
                 ]),
-                TextInput::make("Email")->required()->email(),
+                TextInput::make("Email")->required()->columnSpan(2)->email(),
+                Placeholder::make('') // Kosongkan 1 kolom
+                ->columnSpan(1),
+                TextInput::make("Occupation")
+                ->columnSpan(2)
+                ->required()
+                ->minLength(5)
+                ->maxLength(100),
+                Placeholder::make('') // Kosongkan 1 kolom
+                ->columnSpan(1),
                 DatePicker::make("Date of Birth")
                 ->required()
                 ->label("Date of Birth")
@@ -52,10 +70,8 @@ class CustomerResource extends Resource
                 ->format('Y-m-d')
                 ->rules(['before:today'])
                 ->validationMessages(["before" => "tanggal tidak valid"]),
-                TextInput::make("Occupation")
-                ->required()
-                ->minLength(5)
-                ->maxLength(100)
+                   
+            ])
             ]);
     }
 

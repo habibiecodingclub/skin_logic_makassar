@@ -15,6 +15,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
 
 class OrderResource extends Resource
 {
@@ -25,22 +27,42 @@ class OrderResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+        ->schema([
+            Grid::make([
+                'default' => 3, // 1 kolom di layar kecil
+                'md' => 3,      // 2 kolom di layar medium (tablet)
+                'lg' => 3,      // 3 kolom di layar besar (desktop)
+            ])
+        
             ->schema([
                 Select::make('customer_id')
                     ->relationship('customer', 'Customer_Name')
                     ->required()
+                    ->columnSpan(2) // Mengambil 2 kolom dari 3
                     ->label('Customer'),
+                Placeholder::make('') // Kosongkan 1 kolom
+                    ->columnSpan(1),
                 TextInput::make('product_name')
                     ->required()
+                    ->columnSpan(2) // Mengambil 2 kolom dari 3
                     ->maxLength(100),
+                Placeholder::make('') // Kosongkan 1 kolom
+                    ->columnSpan(1),
                 TextInput::make('quantity')
                     ->required()
+                    ->columnSpan(1) // Mengambil 2 kolom dari 3
                     ->numeric(),
+                Placeholder::make('') // Kosongkan 1 kolom
+                    ->columnSpan(1),
                 TextInput::make('total_price')
                     ->required()
+                    ->columnSpan(2) // Mengambil 2 kolom dari 3
                     ->numeric(),
+                Placeholder::make('') // Kosongkan 1 kolom
+                    ->columnSpan(1),
                 Forms\Components\DatePicker::make('order_date')
                     ->required(),
+                    ])
             ]);
     }
 
