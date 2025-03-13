@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("customer_id")->unique();
             $table->string("Customer_Name");
+<<<<<<< HEAD
             $table->bigInteger("Phone Number");
+=======
+            $table->string("Phone Number");
+>>>>>>> e6cac63ca8a52c9984ac36e49ed5d2f3b56b82f3
             $table->string("Email");
             $table->string("Occupation");
             $table->date("Date of Birth");

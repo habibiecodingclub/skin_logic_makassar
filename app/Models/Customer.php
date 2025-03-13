@@ -16,10 +16,10 @@ class Customer extends Model
         'Date of Birth',
         'Occupation',
     ];
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
+    // public function orders()
+    // {
+    //     return $this->hasMany(Order::class);
+    // }
 
 
     protected static function boot()

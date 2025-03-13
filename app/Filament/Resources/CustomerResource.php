@@ -29,11 +29,7 @@ class CustomerResource extends Resource
     {
         return $form
         ->schema([
-            Grid::make([
-                'default' => 3, // 1 kolom di layar kecil
-                'md' => 3,      // 2 kolom di layar medium (tablet)
-                'lg' => 3,      // 3 kolom di layar besar (desktop)
-            ]) ->schema([
+            Grid::make(4) ->schema([
                 TextInput::make("Customer_Name")
                 ->required()
                 ->columnSpan(2) // Mengambil 2 kolom dari 3
@@ -44,6 +40,8 @@ class CustomerResource extends Resource
                     "minLength" => "Customer name must be at least 3 characters.",
                     "regex"=>"Customer name should contain alphabets characters and space."
                 ]),
+                Placeholder::make('') // Kosongkan 1 kolom
+                ->columnSpan(2),
                 TextInput::make("Phone Number")
                 ->required()
                 ->columnSpan(2)
@@ -53,16 +51,18 @@ class CustomerResource extends Resource
                 ->validationMessages([
                     "regex" => "Customer phone number should only contain numbers"
                 ]),
+                Placeholder::make('') // Kosongkan 1 kolom
+                ->columnSpan(2),
                 TextInput::make("Email")->required()->columnSpan(2)->email(),
                 Placeholder::make('') // Kosongkan 1 kolom
-                ->columnSpan(1),
+                ->columnSpan(2),
                 TextInput::make("Occupation")
                 ->columnSpan(2)
                 ->required()
                 ->minLength(5)
                 ->maxLength(100),
                 Placeholder::make('') // Kosongkan 1 kolom
-                ->columnSpan(1),
+                ->columnSpan(2),
                 DatePicker::make("Date of Birth")
                 ->required()
                 ->label("Date of Birth")
