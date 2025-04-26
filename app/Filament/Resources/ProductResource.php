@@ -8,14 +8,19 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportBulkAction as ActionsExportBulkAction;
+// use Filament\Tables\Actions\ExportBulkAction as ActionsExportBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+// use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 
     public static function form(Form $form): Form
     {
@@ -46,7 +51,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('Product_Name')->label('Product Name'),
+                Tables\Columns\TextColumn::make('Product_Name')->label('Product Name')->searchable(),
                 Tables\Columns\TextColumn::make('Product_Category')->label('Product Category'),
                 Tables\Columns\TextColumn::make('Product_Price')->label('Product Price'),
                 Tables\Columns\TextColumn::make('SKU-Number')->label('SKU Number'),
@@ -57,11 +62,13 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ExportAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                    ExportBulkAction::make()
+                ])
             ]);
     }
 

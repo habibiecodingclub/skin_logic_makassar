@@ -6,7 +6,7 @@
 <div {{ $attributes->class(['fi-simple-page']) }}>
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIMPLE_PAGE_START, scopes: $this->getRenderHookScopes()) }}
 
-    <section class="grid auto-cols-fr gap-y-6">
+    <section class="grid auto-cols-fr gap-y-6 login">
         {{-- <x-filament-panels::header.simple --}}
             {{-- :heading="$heading ??= $this->getHeading()" --}}
             {{-- :logo="$this->hasLogo()" --}}

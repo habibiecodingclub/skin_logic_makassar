@@ -21,7 +21,7 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -66,7 +66,7 @@ class CustomerResource extends Resource
             ->columns([
                 //
                 TextColumn::make('customer_id'),
-                TextColumn::make('Customer_Name'),
+                TextColumn::make('Customer_Name')->searchable(),
                 TextColumn::make('Phone Number'),
                 TextColumn::make('Email'),
                 TextColumn::make('Date of Birth'),

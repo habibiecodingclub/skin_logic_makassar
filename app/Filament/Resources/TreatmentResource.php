@@ -21,7 +21,7 @@ class TreatmentResource extends Resource
 {
     protected static ?string $model = Treatment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-archive-box';
 
     public static function form(Form $form): Form
     {
@@ -55,7 +55,7 @@ class TreatmentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make("Treatment_Name")->label("Treatment Name"),
+                TextColumn::make("Treatment_Name")->label("Treatment Name")->searchable(),
                 TextColumn::make("Treatment_Category")->label("Treatment Category"),
                 TextColumn::make("Treatment_Price")->label("Treatment Price")->formatStateUsing(function ($state){
                     return "Rp. " . number_format($state, 2, ',', '.');
