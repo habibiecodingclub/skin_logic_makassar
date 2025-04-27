@@ -131,7 +131,8 @@
             @if (! $hasHeader) x-cloak @endif
             x-bind:hidden="! (@js($hasHeader) || (selectedRecords.length && @js(count($bulkActions))))"
             x-show="@js($hasHeader) || (selectedRecords.length && @js(count($bulkActions)))"
-            class="fi-ta-header-ctn divide-y divide-gray-200 dark:divide-white/10"
+            {{-- class="fi-ta-header-ctn divide-y divide-gray-200 dark:divide-white/10" --}}
+            class="fi-ta-header-ctn flex justify-between dark:divide-white/10"
         >
             {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\Tables\View\TablesRenderHook::HEADER_BEFORE, scopes: static::class) }}
 

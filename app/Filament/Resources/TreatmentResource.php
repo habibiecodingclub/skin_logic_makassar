@@ -16,6 +16,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TreatmentResource extends Resource
 {
@@ -66,6 +68,11 @@ class TreatmentResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()->withFilename(fn () => "TreatmentsList-" . date("d-m-Y"))
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

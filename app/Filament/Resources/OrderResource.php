@@ -5,13 +5,18 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+// use Filament\Actions\ExportAction;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class OrderResource extends Resource
 {
@@ -23,7 +28,7 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make("Order_Name")
             ]);
     }
 
@@ -31,10 +36,15 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make("Order_Name")->label('Order Name')->searchable()
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()->withFilename(fn () => "OrdersList-" . date("d-m-Y"))
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

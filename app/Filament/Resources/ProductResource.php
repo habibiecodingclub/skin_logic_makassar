@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 // use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ProductResource extends Resource
 {
@@ -62,12 +63,16 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                ExportAction::make()
+                // ExportAction::make()
+            ])
+            ->headerActions([
+                ExportAction::make()->exports([
+                    ExcelExport::make()->withFilename(fn () => "CustomerList-" . date('d-m-Y'))
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    ExportBulkAction::make()
                 ])
             ]);
     }
