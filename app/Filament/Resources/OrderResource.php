@@ -44,7 +44,7 @@ class OrderResource extends Resource
             ->headerActions([
                 ExportAction::make()->exports([
                     ExcelExport::make()->withFilename(fn () => "OrdersList-" . date("d-m-Y"))
-                ])
+                ])->label("Download")
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

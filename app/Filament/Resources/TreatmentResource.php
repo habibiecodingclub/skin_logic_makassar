@@ -72,7 +72,7 @@ class TreatmentResource extends Resource
             ->headerActions([
                 ExportAction::make()->exports([
                     ExcelExport::make()->withFilename(fn () => "TreatmentsList-" . date("d-m-Y"))
-                ])
+                ])->label("Download")
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

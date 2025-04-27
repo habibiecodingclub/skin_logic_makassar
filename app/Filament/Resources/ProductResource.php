@@ -68,7 +68,7 @@ class ProductResource extends Resource
             ->headerActions([
                 ExportAction::make()->exports([
                     ExcelExport::make()->withFilename(fn () => "CustomerList-" . date('d-m-Y'))
-                ])
+                ])->label("Download")
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
