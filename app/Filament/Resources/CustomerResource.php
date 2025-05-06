@@ -37,7 +37,7 @@ class CustomerResource extends Resource
                         "minLength" => "Customer name must be at least 3 characters.",
                         "regex" => "Customer name should contain alphabets characters and space."
                     ]),
-                TextInput::make("Phone Number")
+                TextInput::make("Phone_Number")
                     ->required()
                     ->numeric()
                     ->minLength(10)
@@ -47,7 +47,7 @@ class CustomerResource extends Resource
                         "regex" => "Customer phone number should only contain numbers"
                     ]),
                 TextInput::make("Email")->required()->email(),
-                DatePicker::make("Date of Birth")
+                DatePicker::make("Date_of_Birth")
                     ->required()
                     ->label("Date of Birth")
                     ->displayFormat("d-m-Y")
@@ -68,9 +68,9 @@ class CustomerResource extends Resource
                 //
                 TextColumn::make('customer_id'),
                 TextColumn::make('Customer_Name')->searchable(),
-                TextColumn::make('Phone Number'),
+                TextColumn::make('Phone_Number'),
                 TextColumn::make('Email'),
-                TextColumn::make('Date of Birth'),
+                TextColumn::make('Date_of_Birth'),
                 TextColumn::make('Occupation'),
                 TextColumn::make('created_at')->formatStateUsing(fn($state) => $state->format('d-m-Y'))->label("bergabung sejak")
             ])

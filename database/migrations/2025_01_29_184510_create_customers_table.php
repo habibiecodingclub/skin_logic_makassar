@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("customer_id")->unique();
             $table->string("Customer_Name");
-            $table->string("Phone Number");
+            $table->string("Phone_Number");
             $table->string("Email");
             $table->string("Occupation");
-            $table->date("Date of Birth");
+            $table->date("Date_of_Birth");
             $table->timestamps();
         });
     }
