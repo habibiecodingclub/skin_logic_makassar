@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    //
     use HasFactory;
     protected $fillable = [
         'Customer_Name',
@@ -16,11 +15,6 @@ class Customer extends Model
         'Date of Birth',
         'Occupation',
     ];
-    // public function orders()
-    // {
-    //     return $this->hasMany(Order::class);
-    // }
-
 
     protected static function boot()
     {
