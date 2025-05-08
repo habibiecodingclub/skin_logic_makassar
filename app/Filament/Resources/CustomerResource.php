@@ -79,7 +79,7 @@ class CustomerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -94,6 +94,7 @@ class CustomerResource extends Resource
             //
         ];
     }
+
 
     public static function getPages(): array
     {
