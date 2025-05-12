@@ -27,10 +27,10 @@ class Product extends Model
     //     $this->attributes['Product_Price'] = $value;
     // }
 
-    public function getProductPriceAttribute($value)
-    {
-        return 'Rp. ' . number_format($value, 2, ',', '.');
-    }
+    // public function getProductPriceAttribute($value)
+    // {
+    //     return 'Rp. ' . number_format($value, 2, ',', '.');
+    // }
 
     /**
      * Get the possible enum values for the Product_Category column.

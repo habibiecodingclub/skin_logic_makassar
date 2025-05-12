@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("Product_Name");
             $table->enum("Product_Category", ["Brightening", "Serum", "Acne", "Racikan", "Peeling", "Lainnya", "Paket"]);
-            $table->string("Product_Price");
+            $table->integer("Product_Price");
             $table->string("SKU-Number")->unique();
             $table->text("Description");
             $table->timestamps();
