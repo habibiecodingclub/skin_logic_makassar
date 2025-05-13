@@ -54,7 +54,9 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('Product_Name')->label('Product Name')->searchable(),
                 Tables\Columns\TextColumn::make('Product_Category')->label('Product Category'),
-                Tables\Columns\TextColumn::make('Product_Price')->label('Product Price'),
+                Tables\Columns\TextColumn::make('Product_Price')->formatStateUsing(function ($state){
+                    return "Rp. " . number_format($state, 2, ',', '.');
+                    }),
                 Tables\Columns\TextColumn::make('SKU-Number')->label('SKU Number'),
                 TextColumn::make('Description')->label('Description'),
             ])
